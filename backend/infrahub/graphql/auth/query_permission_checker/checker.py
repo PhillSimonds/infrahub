@@ -18,7 +18,7 @@ class GraphQLQueryPermissionChecker:
         account_session: AccountSession,
         analyzed_query: InfrahubGraphQLQueryAnalyzer,
         query_parameters: GraphqlParams,
-        branch: Branch | str | None = None,
+        branch: Branch,
     ) -> None:
         for sub_checker in self.sub_checkers:
             if await sub_checker.supports(db=db, account_session=account_session, branch=branch):

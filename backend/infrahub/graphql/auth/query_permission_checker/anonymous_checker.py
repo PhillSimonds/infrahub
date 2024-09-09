@@ -14,9 +14,7 @@ class AnonymousGraphQLPermissionChecker(GraphQLQueryPermissionCheckerInterface):
     def __init__(self, anonymous_access_allowed_func: Callable[[], bool]):
         self.anonymous_access_allowed_func = anonymous_access_allowed_func
 
-    async def supports(
-        self, db: InfrahubDatabase, account_session: AccountSession, branch: Branch | str | None = None
-    ) -> bool:
+    async def supports(self, db: InfrahubDatabase, account_session: AccountSession, branch: Branch) -> bool:
         return not account_session.authenticated
 
     async def check(
@@ -24,7 +22,7 @@ class AnonymousGraphQLPermissionChecker(GraphQLQueryPermissionCheckerInterface):
         db: InfrahubDatabase,
         analyzed_query: InfrahubGraphQLQueryAnalyzer,
         query_parameters: GraphqlParams,
-        branch: Branch | str | None = None,
+        branch: Branch,
     ) -> CheckerResolution:
         if self.anonymous_access_allowed_func() and not analyzed_query.contains_mutation:
             return CheckerResolution.TERMINATE
