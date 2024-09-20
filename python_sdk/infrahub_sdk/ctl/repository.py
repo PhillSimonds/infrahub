@@ -53,6 +53,13 @@ def load_repository_config_file(repo_config_file: Path) -> dict:
     return data
 
 
+def load_query_config(transform_config):
+    query_config_obj = InfrahubRepositoryGraphQLConfig(
+        name=transform_config.query, file_path=Path(transform_config.query + ".gql")
+    )
+    repository_config.queries.append(query_config_obj)
+
+
 @app.callback()
 def callback() -> None:
     """

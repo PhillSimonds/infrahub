@@ -242,7 +242,7 @@ def find_files(extension: Union[str, list[str]], directory: Union[str, Path] = "
 
 
 def get_branch(branch: Optional[str] = None, directory: Union[str, Path] = ".") -> str:
-    """If branch isn't provide, return the name of the local Git branch."""
+    """If branch isn't provided, return the name of the local Git branch."""
     if branch:
         return branch
 
